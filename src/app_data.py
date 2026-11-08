@@ -22,6 +22,7 @@ from src.evaluate import baseline_scores, bootstrap, hits_at_k, hits_curve, scal
 from src.features import _assigner_domain, _kev_vendor_patterns, _match_vendors, _norm
 from src.load import load
 from src.v1_LightGBM.train import CORE, LogReg, load_sets
+from src.v2_Granite_Analyst.stage2 import JOB, load_fields
 
 APP = OUT / "app"
 MODEL_NAME = "v1 logistic regression on 11 core features, trained on 2024 + 2025"
@@ -30,6 +31,42 @@ FLAG_NAMES = {"poc_github": "GitHub proof of concept", "nuclei": "Nuclei templat
 GROUPS = {"exploit": ["any_flag", "n_flags", "poc_github", "nuclei", "metasploit", "exploitdb"],
           "epss": ["epss_pct"], "assigner": ["assigner_kev_rate"],
           "vendor": ["vendor_kev_rate", "vendor_kev_hist"], "product": ["kev_product_named"]}
+
+GRANITE_LABELS = {"os_kernel": "OS or kernel", "iot_device": "IoT device", "ics_ot": "ICS or OT", "edge_network": "Edge network device",
+                  "virtualization_cloud": "Virtualization or cloud", "wordpress_plugin": "WordPress plugin", "web_app": "Web app",
+                  "rce": "Remote code execution", "xss_or_csrf": "XSS or CSRF", "ssrf": "SSRF", "sql_injection": "SQL injection",
+                  "auth_bypass": "Authentication bypass", "file_read_or_traversal": "File read or traversal"}
+
+
+def pretty(value: str) -> str:
+    return GRANITE_LABELS.get(value, value.replace("_", " ").capitalize())
+
+
+def granite_labels(ids: pd.Series) -> list[str]:
+    """Granite's product type and attack type per vulnerability, for display only. Blank where it didn't read one."""
+    path = next((p for p in (OUT / "granite_fields", JOB / "granite_fields") if p.exists()), None)
+    if path is None:
+        return [""] * len(ids)
+    g = load_fields(path).reindex(ids)
+    return [" · ".join(pretty(v) for v in pair if isinstance(v, str) and v != "other")
+            for pair in zip(g.category, g.attack_type)]
+
+
+def granite_summary() -> dict | None:
+    """Stage-2 results for the Evidence tab. None until stage 2 has run."""
+    if not (JOB / "results.csv").exists():
+        return None
+    res = pd.read_csv(JOB / "results.csv")
+    res["test_year"] = res.direction.str.split(" -> ").str[1]
+    years = {y: [{"model": r.model, "hits": int(r["hits@K"]), "range": r["95% CI"].strip("[]").replace("-", "–")}
+                 for _, r in t.iterrows()] for y, t in res.groupby("test_year")}
+    rates = {}
+    for key, file in (("category", "rate_by_g_category.csv"), ("attack", "rate_by_g_attack_type.csv")):
+        t = pd.read_csv(JOB / file)
+        t = t[t.n >= 100].sort_values("per_10k", ascending=False)
+        rates[key] = [{"name": pretty(r.iloc[0]), "read": int(r.n), "later_exploited": int(r.later_exploited),
+                       "per_10k": float(r.per_10k)} for _, r in t.iterrows()]
+    return {"years": years, "rates": rates}
 
 
 def contributions(m: LogReg, df: pd.DataFrame) -> pd.DataFrame:
@@ -98,9 +135,10 @@ def main():
         lines.append(("Ranked here mainly because: " + "; ".join(ups) + ".") if ups else
                      "Nothing in this vulnerability's signals stands out.")
     q["reasons"], q["reason_line"] = reasons, lines
+    q["granite"] = granite_labels(q.cve_id)  # display only: the score above doesn't use it
 
     keep = ["rank", "cve_id", "score", "published", "vendor", "assigned_by", "attack_vector", "description",
-            "exploit_code", "epss", "epss_rank", "baseline_cvss3", "cvss_rank", "reasons", "reason_line"]
+            "exploit_code", "epss", "epss_rank", "baseline_cvss3", "cvss_rank", "reasons", "reason_line", "granite"]
     q[keep].rename(columns={"baseline_cvss3": "cvss"}).sort_values("rank").to_parquet(APP / "queue.parquet", index=False)
 
     # Evidence: only years the model did not train on
@@ -116,7 +154,8 @@ def main():
                             "hits": {n: hits_at_k(y, s, k) for n, s in sc.items()},
                             "ranges": {n: [int(v) for v in bootstrap(y, s, k)] for n, s in sc.items()}}
     pd.concat(frames, ignore_index=True).to_parquet(APP / "validation.parquet", index=False)
-    json.dump({"model": MODEL_NAME, "rows": len(q), "kev_through": "Dec 31, 2025", "years": summary},
+    json.dump({"model": MODEL_NAME, "rows": len(q), "kev_through": "Dec 31, 2025", "years": summary,
+               "granite": granite_summary()},
               open(APP / "meta.json", "w"), indent=1)
     print("wrote", APP, summary)
 

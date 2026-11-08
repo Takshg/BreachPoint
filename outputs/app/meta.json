@@ -63,5 +63,225 @@
     ]
    }
   }
+ },
+ "granite": {
+  "years": {
+   "2024": [
+    {
+     "model": "v2 logistic",
+     "hits": 3,
+     "range": "0\u20137"
+    },
+    {
+     "model": "v2 LightGBM",
+     "hits": 7,
+     "range": "2\u201312"
+    }
+   ],
+   "2025": [
+    {
+     "model": "v2 logistic",
+     "hits": 12,
+     "range": "6\u201319"
+    },
+    {
+     "model": "v2 LightGBM",
+     "hits": 13,
+     "range": "7\u201320"
+    }
+   ]
+  },
+  "rates": {
+   "category": [
+    {
+     "name": "Remote management",
+     "read": 319,
+     "later_exploited": 8,
+     "per_10k": 250.8
+    },
+    {
+     "name": "Enterprise app",
+     "read": 944,
+     "later_exploited": 10,
+     "per_10k": 105.9
+    },
+    {
+     "name": "Web app",
+     "read": 1150,
+     "later_exploited": 12,
+     "per_10k": 104.3
+    },
+    {
+     "name": "IoT device",
+     "read": 435,
+     "later_exploited": 3,
+     "per_10k": 69.0
+    },
+    {
+     "name": "Virtualization or cloud",
+     "read": 294,
+     "later_exploited": 2,
+     "per_10k": 68.0
+    },
+    {
+     "name": "Library",
+     "read": 908,
+     "later_exploited": 5,
+     "per_10k": 55.1
+    },
+    {
+     "name": "Dev tool",
+     "read": 425,
+     "later_exploited": 2,
+     "per_10k": 47.1
+    },
+    {
+     "name": "ICS or OT",
+     "read": 453,
+     "later_exploited": 2,
+     "per_10k": 44.2
+    },
+    {
+     "name": "Other",
+     "read": 746,
+     "later_exploited": 3,
+     "per_10k": 40.2
+    },
+    {
+     "name": "OS or kernel",
+     "read": 1341,
+     "later_exploited": 5,
+     "per_10k": 37.3
+    },
+    {
+     "name": "Edge network device",
+     "read": 945,
+     "later_exploited": 3,
+     "per_10k": 31.7
+    },
+    {
+     "name": "Security product",
+     "read": 768,
+     "later_exploited": 2,
+     "per_10k": 26.0
+    },
+    {
+     "name": "Desktop app",
+     "read": 990,
+     "later_exploited": 1,
+     "per_10k": 10.1
+    },
+    {
+     "name": "Mobile",
+     "read": 1149,
+     "later_exploited": 1,
+     "per_10k": 8.7
+    },
+    {
+     "name": "Browser",
+     "read": 739,
+     "later_exploited": 0,
+     "per_10k": 0.0
+    },
+    {
+     "name": "Database",
+     "read": 156,
+     "later_exploited": 0,
+     "per_10k": 0.0
+    },
+    {
+     "name": "WordPress plugin",
+     "read": 274,
+     "later_exploited": 0,
+     "per_10k": 0.0
+    }
+   ],
+   "attack": [
+    {
+     "name": "File read or traversal",
+     "read": 348,
+     "later_exploited": 7,
+     "per_10k": 201.1
+    },
+    {
+     "name": "Authentication bypass",
+     "read": 502,
+     "later_exploited": 9,
+     "per_10k": 179.3
+    },
+    {
+     "name": "Deserialization",
+     "read": 200,
+     "later_exploited": 3,
+     "per_10k": 150.0
+    },
+    {
+     "name": "SQL injection",
+     "read": 370,
+     "later_exploited": 3,
+     "per_10k": 81.1
+    },
+    {
+     "name": "Remote code execution",
+     "read": 1638,
+     "later_exploited": 12,
+     "per_10k": 73.3
+    },
+    {
+     "name": "Command injection",
+     "read": 599,
+     "later_exploited": 3,
+     "per_10k": 50.1
+    },
+    {
+     "name": "File upload",
+     "read": 205,
+     "later_exploited": 1,
+     "per_10k": 48.8
+    },
+    {
+     "name": "Privilege escalation",
+     "read": 1459,
+     "later_exploited": 7,
+     "per_10k": 48.0
+    },
+    {
+     "name": "XSS or CSRF",
+     "read": 1503,
+     "later_exploited": 7,
+     "per_10k": 46.6
+    },
+    {
+     "name": "Other",
+     "read": 1502,
+     "later_exploited": 5,
+     "per_10k": 33.3
+    },
+    {
+     "name": "Memory corruption",
+     "read": 1649,
+     "later_exploited": 2,
+     "per_10k": 12.1
+    },
+    {
+     "name": "Info disclosure",
+     "read": 1325,
+     "later_exploited": 1,
+     "per_10k": 7.5
+    },
+    {
+     "name": "Denial of service",
+     "read": 692,
+     "later_exploited": 0,
+     "per_10k": 0.0
+    },
+    {
+     "name": "SSRF",
+     "read": 131,
+     "later_exploited": 0,
+     "per_10k": 0.0
+    }
+   ]
+  }
  }
 }

@@ -1,0 +1,15 @@
+g_attack_type,n,later_exploited,per_10k
+auth_bypass,502,9,179.3
+command_injection,599,3,50.1
+denial_of_service,692,0,0.0
+deserialization,200,3,150.0
+file_read_or_traversal,348,7,201.1
+file_upload,205,1,48.8
+info_disclosure,1325,1,7.5
+memory_corruption,1649,2,12.1
+other,1502,5,33.3
+privilege_escalation,1459,7,48.0
+rce,1638,12,73.3
+sql_injection,370,3,81.1
+ssrf,131,0,0.0
+xss_or_csrf,1503,7,46.6

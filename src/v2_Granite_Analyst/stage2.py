@@ -12,6 +12,12 @@ Turning them into features without overfitting 24-45 positives:
 
 Evaluation as in v1: both directions, paired bootstrap vs the best baseline and vs v1 logistic core.
 
+Partial coverage: the Colab run stopped at about 32,000 of 162,985 rows, done in v1-score order. So Granite
+only re-ranks a pool, the top POOL_SHARE of each set by v1 score; everything else keeps its v1 order below it.
+The pool is set by the out-of-sample v1 model (trained on the other year), because the queue order came from
+a model fitted on both years' labels and using coverage itself as a signal would leak them. The v2 model is
+trained on Granite-covered rows only.
+
 Usage: uv run python -m src.v2_Granite_Analyst.stage2 [--fields outputs/v2_Granite_Analyst/granite_fields]
 """
 from __future__ import annotations
@@ -37,6 +43,7 @@ LIFTS = list(GROUPS)
 ORDINAL = ["g_internet_facing", "g_pre_auth", "g_server_product"]
 V2 = CORE + LIFTS + ORDINAL
 SMOOTH = 20
+POOL_SHARE = 0.10  # fixed before seeing any v2 result: 99.5%+ of this pool has Granite fields
 
 
 def load_fields(path) -> pd.DataFrame:
@@ -87,13 +94,24 @@ def add_granite(df: pd.DataFrame, fields: pd.DataFrame, year: int) -> pd.DataFra
 
 class LogRegV2(LogReg):
     def _X(self, df):
-        X = super()._X(df)
-        return X.fillna(0)  # missing Granite fields -> neutral (log lift 0, ordinal 0)
+        df = df.copy()
+        df[ORDINAL] = df[ORDINAL].fillna(0.5)  # missing -> "unclear"
+        return super()._X(df)  # missing log lifts -> 0, which is neutral
+
+
+def pool_order(v1, v2, share: float = POOL_SHARE) -> np.ndarray:
+    """Final ordering score: the top `share` by v1, re-ranked by v2, sits above the rest in v1 order."""
+    r = pd.Series(np.asarray(v1)).rank(pct=True, method="first").to_numpy()
+    in_pool = r > 1 - share
+    final = r.copy()
+    final[in_pool] = 1 + pd.Series(np.asarray(v2)[in_pool]).rank(pct=True, method="first").to_numpy()
+    return final
 
 
 def evaluate(make, train, test, ref_scores, label):
-    m = make().fit(train, train.label.to_numpy(int))
-    s = m.predict(test)
+    covered = train[train.granite_coverage == 1]
+    m = make().fit(covered, covered.label.to_numpy(int))
+    s = pool_order(ref_scores, m.predict(test))
     y = test.label.to_numpy(int)
     k = scaled_k(len(test))
     base = baseline_scores(test)["Exploit code, then EPSS"]
@@ -114,7 +132,8 @@ def main(fields_dir):
         sets[y] = add_granite(sets[y], fields, y)
         print(f"{y}: Granite coverage {sets[y].granite_coverage.mean():.1%}")
 
-    # Phase 6 #2: later-exploited rate by Granite field (2024 + 2025 cohorts)
+    # Phase 6 #2: later-exploited rate by Granite field (2024 + 2025 cohorts). Covered rows only, so these
+    # rates describe the higher-scoring part of each cohort, not the whole cohort.
     both = pd.concat([sets[2024], sets[2025]], ignore_index=True)
     for c in ("g_category", "g_attack_type"):
         t = both.groupby(c).agg(n=("label", "size"), later_exploited=("label", "sum"))
@@ -136,13 +155,17 @@ def main(fields_dir):
 
     # Final: train on 2024 + 2025, score 2026
     s26 = sets[2026]
+    ref26 = LogReg(CORE).fit(both, both.label.to_numpy(int)).predict(s26)
+    in_pool = pd.Series(ref26).rank(pct=True, method="first").to_numpy() > 1 - POOL_SHARE
+    print(f"2026 pool: {in_pool.sum():,} rows, {s26.granite_coverage.to_numpy()[in_pool].mean():.1%} with Granite fields")
+    covered = both[both.granite_coverage == 1]
     for name, fname in (("v2 logistic", "logreg_v2"), ("v2 LightGBM", "lgbm_v2")):
-        m = models[name]().fit(both, both.label.to_numpy(int))
-        sc = pd.DataFrame({"cve_id": s26.cve_id, "score": m.predict(s26)})
+        m = models[name]().fit(covered, covered.label.to_numpy(int))
+        sc = pd.DataFrame({"cve_id": s26.cve_id, "score": pool_order(ref26, m.predict(s26))})
         sc["rank"] = sc.score.rank(ascending=False, method="first").astype(int)
         sc.sort_values("rank").to_parquet(JOB / f"scores_2026_{fname}.parquet", index=False)
         sc.sort_values("rank").head(500)[["cve_id"]].to_csv(JOB / f"top500_{fname}.csv", index=False)
-    json.dump({"features": V2, "smooth": SMOOTH}, open(JOB / "config.json", "w"), indent=1)
+    json.dump({"features": V2, "smooth": SMOOTH, "pool_share": POOL_SHARE}, open(JOB / "config.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

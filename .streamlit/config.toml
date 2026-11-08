@@ -12,5 +12,8 @@ linkColor = "#6fe9ff"
 [client]
 toolbarMode = "minimal"
 
+[server]
+address = "127.0.0.1"
+
 [browser]
 gatherUsageStats = false

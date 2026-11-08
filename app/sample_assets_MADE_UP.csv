@@ -1,0 +1,31 @@
+asset,owner,software,exposure,environment,data_value
+edge-fw-01,Network,WatchGuard Fireware,internet,production,high
+edge-fw-02,Network,PAN-OS,internet,production,high
+vpn-gw-01,Network,Ivanti EPMM; FortiOS,internet,production,high
+netscaler-prod,Network,NetScaler,internet,production,medium
+mft-prod-01,Integration,Fortra GoAnywhere,internet,production,high
+mft-sandbox,Integration,Fortra GoAnywhere,isolated,dev/test,none
+sharefile-szc,Integration,ShareFile,internet,production,high
+ftp-test-sandbox,Integration,Wing FTP Server,isolated,dev/test,none
+camel-orders-prod,Payments,Apache Camel; Apache Tomcat,internal,production,high
+camel-orders-lab,Payments,Apache Camel; Apache Tomcat,isolated,dev/test,none
+activemq-prod,Payments,Apache ActiveMQ,internal,production,high
+web-store-01,Web,Apache HTTP Server; Laravel; MySQL,internet,production,high
+web-store-staging,Web,Apache HTTP Server; Laravel; MySQL,internal,staging,medium
+marketing-site,Web,WordPress; Nginx,internet,production,none
+struts-legacy,Web,Apache Struts; Apache Tomcat,internal,production,medium
+itsm-servicenow,IT,ServiceNow,internet,production,high
+epm-core,IT,Ivanti Endpoint Manager,internal,production,high
+epm-test,IT,Ivanti Endpoint Manager,isolated,dev/test,none
+remote-support,IT,BeyondTrust Remote Support,internet,production,high
+win-dc-01,IT,Microsoft Windows Server,internal,production,high
+win-file-02,IT,Microsoft Windows Server,internal,production,medium
+win-lab-vm,IT,Microsoft Windows Server,isolated,dev/test,none
+exchange-mail,IT,Microsoft Exchange Server,internet,production,high
+sharepoint-intra,IT,Microsoft SharePoint,internal,production,medium
+staff-laptops,IT,Microsoft Windows 11; Google Chrome; Microsoft Office,internal,production,medium
+mac-design-pool,IT,macOS; Firefox,internal,production,none
+ml-langflow-dev,Data,Langflow; Apache Airflow,isolated,dev/test,none
+ml-langflow-sbx,Data,Langflow,isolated,dev/test,none
+ci-teamcity,Engineering,TeamCity; GitLab,internal,staging,high
+backup-veeam,IT,Veeam,internal,production,high

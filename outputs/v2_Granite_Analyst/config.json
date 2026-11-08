@@ -1,0 +1,24 @@
+{
+ "features": [
+  "epss_pct",
+  "exploitdb",
+  "metasploit",
+  "nuclei",
+  "poc_github",
+  "n_flags",
+  "any_flag",
+  "assigner_kev_rate",
+  "vendor_kev_rate",
+  "vendor_kev_hist",
+  "kev_product_named",
+  "lift_category",
+  "lift_category_preauth",
+  "lift_attack",
+  "lift_attack_preauth",
+  "g_internet_facing",
+  "g_pre_auth",
+  "g_server_product"
+ ],
+ "smooth": 20,
+ "pool_share": 0.1
+}
