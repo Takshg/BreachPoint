@@ -1,0 +1,67 @@
+{
+ "model": "v1 logistic regression on 11 core features, trained on 2024 + 2025",
+ "rows": 72670,
+ "kev_through": "Dec 31, 2025",
+ "years": {
+  "2025": {
+   "trained_on": 2024,
+   "k": 243,
+   "rows": 35278,
+   "positives": 45,
+   "hits": {
+    "BreachPoint": 16,
+    "CVSS 3 first": 4,
+    "EPSS first": 8,
+    "Exploit code, then EPSS": 14
+   },
+   "ranges": {
+    "BreachPoint": [
+     8,
+     23
+    ],
+    "CVSS 3 first": [
+     1,
+     8
+    ],
+    "EPSS first": [
+     3,
+     14
+    ],
+    "Exploit code, then EPSS": [
+     7,
+     22
+    ]
+   }
+  },
+  "2024": {
+   "trained_on": 2025,
+   "k": 198,
+   "rows": 28836,
+   "positives": 24,
+   "hits": {
+    "BreachPoint": 7,
+    "CVSS 3 first": 0,
+    "EPSS first": 1,
+    "Exploit code, then EPSS": 4
+   },
+   "ranges": {
+    "BreachPoint": [
+     2,
+     12
+    ],
+    "CVSS 3 first": [
+     0,
+     3
+    ],
+    "EPSS first": [
+     0,
+     3
+    ],
+    "Exploit code, then EPSS": [
+     1,
+     8
+    ]
+   }
+  }
+ }
+}

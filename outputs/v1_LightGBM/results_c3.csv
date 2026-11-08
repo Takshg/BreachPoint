@@ -1,0 +1,4 @@
+model,test,K,hits@K,baseline,positives
+v1 LightGBM core,2025 Mar-Sep,188,11,9,33
+v1 logistic core,2025 Mar-Sep,188,10,9,33
+ref: LightGBM all 21,2025 Mar-Sep,188,6,9,33

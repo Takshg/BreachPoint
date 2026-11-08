@@ -1,0 +1,3 @@
+year,K,later_exploited,model_hits,outside_CVSS_and_EPSS_top_K_inside_model,of_those_also_in_exploit_code_baseline_top_K,model_only_vs_all_three_baselines
+2025,243,45,16,11,3,8
+2024,198,24,7,6,1,5

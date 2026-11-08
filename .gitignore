@@ -1,0 +1,27 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data (large; download data.zip separately)
+data/*.csv
+data/*.zip
+data/parquet/
+.DS_Store
+
+
+notes/
+# Generated outputs (rebuild with src/ scripts)
+outputs/**/*.parquet
+outputs/**/*.zip
+outputs/**/granite_fields/
+
+/data
+outputs/**/*.npy
+outputs/**/parts/

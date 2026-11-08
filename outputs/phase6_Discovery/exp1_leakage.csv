@@ -1,0 +1,23 @@
+model,variant,direction,K,hits@K,95% range,diff vs reference,AP
+LogReg,core (clean),2024->2025,243,16,8-23,+0.0 [+0 to +0],0.0632
+LogReg,core + all leaky columns,2024->2025,243,14,7-22,-1.1 [-6 to +4],0.1302
+LogReg,core + leak_analyzed,2024->2025,243,16,9-24,+0.6 [+0 to +5],0.082
+LogReg,core + leak_has_cpes,2024->2025,243,16,9-24,+0.6 [+0 to +5],0.0819
+LogReg,core + leak_refs,2024->2025,243,15,8-23,-0.4 [-5 to +4],0.1112
+LogReg,core + leak_cvss_nist,2024->2025,243,11,5-18,-4.0 [-9 to +0],0.0715
+LogReg,core + leak_cvss_any,2024->2025,243,14,7-22,-1.3 [-5 to +3],0.0792
+LogReg,core + leak_has_cwe,2024->2025,243,16,8-23,+0.1 [+0 to +2],0.0639
+LogReg,core + kw_exploited,2024->2025,243,16,8-23,+0.0 [+0 to +1],0.0623
+LGBM,core (clean),2024->2025,243,14,7-22,+0.0 [+0 to +0],0.0786
+LGBM,core + all leaky columns,2024->2025,243,12,7-21,-1.0 [-7 to +4],0.0836
+LogReg,core (clean),2025->2024,198,7,2-12,+0.0 [+0 to +0],0.0207
+LogReg,core + all leaky columns,2025->2024,198,7,3-12,+0.0 [-4 to +4],0.0309
+LogReg,core + leak_analyzed,2025->2024,198,7,3-12,+0.0 [+0 to +0],0.0225
+LogReg,core + leak_has_cpes,2025->2024,198,7,3-12,+0.0 [+0 to +0],0.0227
+LogReg,core + leak_refs,2025->2024,198,7,2-12,+0.0 [-5 to +4],0.0216
+LogReg,core + leak_cvss_nist,2025->2024,198,8,3-14,+1.0 [+0 to +3],0.0254
+LogReg,core + leak_cvss_any,2025->2024,198,8,3-14,+1.1 [+0 to +3],0.0312
+LogReg,core + leak_has_cwe,2025->2024,198,7,3-12,+0.0 [+0 to +0],0.0211
+LogReg,core + kw_exploited,2025->2024,198,6,2-11,-1.2 [-5 to +2],0.017
+LGBM,core (clean),2025->2024,198,4,1-8,+0.0 [+0 to +0],0.0366
+LGBM,core + all leaky columns,2025->2024,198,4,1-8,+0.0 [-2 to +3],0.0256

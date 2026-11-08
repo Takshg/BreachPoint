@@ -1,0 +1,65 @@
+{
+ "lgbm_core": {
+  "features": [
+   "epss_pct",
+   "exploitdb",
+   "metasploit",
+   "nuclei",
+   "poc_github",
+   "n_flags",
+   "any_flag",
+   "assigner_kev_rate",
+   "vendor_kev_rate",
+   "vendor_kev_hist",
+   "kev_product_named"
+  ],
+  "rounds": 92
+ },
+ "logreg_core": {
+  "features": [
+   "epss_pct",
+   "exploitdb",
+   "metasploit",
+   "nuclei",
+   "poc_github",
+   "n_flags",
+   "any_flag",
+   "assigner_kev_rate",
+   "vendor_kev_rate",
+   "vendor_kev_hist",
+   "kev_product_named"
+  ],
+  "rounds": null
+ },
+ "params": {
+  "objective": "binary",
+  "learning_rate": 0.03,
+  "num_leaves": 7,
+  "max_depth": 4,
+  "min_child_samples": 40,
+  "min_sum_hessian_in_leaf": 0.001,
+  "feature_fraction": 0.7,
+  "bagging_fraction": 0.8,
+  "bagging_freq": 1,
+  "lambda_l2": 5.0,
+  "scale_pos_weight": 20.0,
+  "verbose": -1,
+  "seed": 0,
+  "deterministic": true,
+  "num_threads": 8,
+  "monotone_constraints": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "monotone_constraints_method": "advanced"
+ }
+}

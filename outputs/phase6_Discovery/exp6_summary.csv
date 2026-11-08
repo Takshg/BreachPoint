@@ -1,0 +1,7 @@
+year,method,later_exploited,warned,median_lead_days,cohort_rows_alerted,precision
+2025,Model top K at snapshot,45,16,38.0,243,0.066
+2025,EPSS >= 0.1 at a month-end,45,10,25.0,564,0.018
+2025,EPSS >= 0.5 at a month-end,45,5,9.0,251,0.02
+2024,Model top K at snapshot,24,7,17.0,198,0.035
+2024,EPSS >= 0.1 at a month-end,24,4,23.0,62,0.065
+2024,EPSS >= 0.5 at a month-end,24,3,31.0,29,0.103

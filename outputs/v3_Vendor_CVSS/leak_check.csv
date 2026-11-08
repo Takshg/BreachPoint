@@ -1,0 +1,5 @@
+year,column,positives,"present, positives","present, others",sign,"mean value, positives","mean value, others"
+2024,has_cna,24,0.167,0.233,-,7.449999809265137,6.71999979019165
+2024,has_cvss4,24,0.042,0.067,-,9.3,6.47
+2025,has_cna,45,0.4,0.441,-,8.270000457763672,6.679999828338623
+2025,has_cvss4,45,0.111,0.249,-,8.7,5.91

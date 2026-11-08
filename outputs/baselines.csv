@@ -1,0 +1,7 @@
+cohort,method,K,hits@K,95% CI,hits@500,AP,positives
+2024,CVSS 3 first,198,0,[0-3],2,0.0028,24
+2024,EPSS first,198,1,[0-3],2,0.0034,24
+2024,"Exploit code, then EPSS",198,4,[1-8],8,0.0092,24
+2025,CVSS 3 first,243,4,[1-8],4,0.0048,45
+2025,EPSS first,243,8,[3-14],8,0.0307,45
+2025,"Exploit code, then EPSS",243,14,[7-22],17,0.0457,45

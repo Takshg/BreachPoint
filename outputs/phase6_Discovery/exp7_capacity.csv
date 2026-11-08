@@ -1,0 +1,41 @@
+year,fixes_per_snapshot_month,total_fixes,method,caught,95% range,later_exploited,model_minus_best_baseline,note
+2025,25,200,Model (v1 logistic),15,8-21,45,+2.2 [-5 to +10],
+2025,25,200,"Exploit code, then EPSS",12,6-19,45,,
+2025,25,200,EPSS first,8,2-12,45,,
+2025,25,200,CVSS 3 first,4,1-8,45,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2025,50,400,Model (v1 logistic),16,9-24,45,+1.4 [-6 to +9],
+2025,50,400,"Exploit code, then EPSS",15,8-22,45,,
+2025,50,400,EPSS first,9,4-15,45,,
+2025,50,400,CVSS 3 first,4,1-8,45,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2025,100,800,Model (v1 logistic),20,12-29,45,+2.2 [-4 to +9],
+2025,100,800,"Exploit code, then EPSS",18,10-26,45,,
+2025,100,800,EPSS first,9,4-16,45,,
+2025,100,800,CVSS 3 first,7,2-12,45,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2025,200,1600,Model (v1 logistic),25,16-35,45,+5.6 [-1 to +13],
+2025,200,1600,"Exploit code, then EPSS",20,12-29,45,,
+2025,200,1600,EPSS first,13,7-21,45,,
+2025,200,1600,CVSS 3 first,8,3-14,45,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2025,500,4000,Model (v1 logistic),30,19-41,45,+1.7 [-5 to +9],
+2025,500,4000,"Exploit code, then EPSS",28,18-39,45,,
+2025,500,4000,EPSS first,24,15-34,45,,
+2025,500,4000,CVSS 3 first,16,9-25,45,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2024,25,200,Model (v1 logistic),7,2-12,24,+3.3 [-1 to +9],
+2024,25,200,"Exploit code, then EPSS",3,0-8,24,,
+2024,25,200,EPSS first,1,0-3,24,,
+2024,25,200,CVSS 3 first,0,0-0,24,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2024,50,400,Model (v1 logistic),9,4-15,24,+4.1 [-1 to +10],
+2024,50,400,"Exploit code, then EPSS",5,1-10,24,,
+2024,50,400,EPSS first,2,0-5,24,,
+2024,50,400,CVSS 3 first,0,0-0,24,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2024,100,800,Model (v1 logistic),14,7-21,24,+5.8 [+1 to +12],
+2024,100,800,"Exploit code, then EPSS",8,3-14,24,,
+2024,100,800,EPSS first,3,0-7,24,,
+2024,100,800,CVSS 3 first,0,0-2,24,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2024,200,1600,Model (v1 logistic),17,10-25,24,+8.9 [+3 to +16],
+2024,200,1600,"Exploit code, then EPSS",8,3-14,24,,
+2024,200,1600,EPSS first,5,1-10,24,,
+2024,200,1600,CVSS 3 first,7,2-12,24,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
+2024,500,4000,Model (v1 logistic),21,13-30,24,+9.9 [+4 to +17],
+2024,500,4000,"Exploit code, then EPSS",11,6-18,24,,
+2024,500,4000,EPSS first,6,2-11,24,,
+2024,500,4000,CVSS 3 first,13,7-20,24,,"uses baseline_cvss3 as given in vulnerabilities.csv, as the README baseline does"
